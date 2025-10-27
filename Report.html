@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agricultural Reports</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#54cf17",
+            "background-light": "#f9fcf8",
+            "background-dark": "#162111",
+            "earthy-green": "#386641",
+            "muted-green": "#A7C957",
+            "accent-yellow": "#FCA311",
+            "text-light": "#121b0e",
+            "text-dark": "#f5f5f5",
+            "border-light": "#ebf3e7",
+            "border-dark": "#3a4a35"
+          },
+          fontFamily: {
+            display: ["Public Sans", "sans-serif"],
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "full": "9999px"
+          },
+        },
+      },
+    };
+  </script>
+<style>
+    body {
+      font-family: 'Public Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center">
+<div class="layout-content-container flex flex-col max-w-6xl flex-1 px-4 sm:px-6 lg:px-8">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark px-6 py-4">
+<div class="flex items-center gap-4 text-text-light dark:text-text-dark">
+<div class="text-earthy-green dark:text-muted-green text-3xl">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<h2 class="text-text-light dark:text-text-dark text-xl font-bold leading-tight tracking-[-0.015em]">AgriPlatform</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-center gap-8">
+<a class="text-text-light dark:text-text-dark text-base font-medium leading-normal hover:text-earthy-green dark:hover:text-muted-green" href="#">Schemes</a>
+<a class="text-text-light dark:text-text-dark text-base font-medium leading-normal hover:text-earthy-green dark:hover:text-muted-green" href="#">Market</a>
+<a class="text-earthy-green dark:text-muted-green text-base font-bold leading-normal" href="Dashboard.html">Dashboard</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex min-w-[96px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-earthy-green text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90">
+<span class="truncate">Profile</span>
+</button>
+<button class="md:hidden text-text-light dark:text-text-dark">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-grow py-8">
+<div class="flex flex-wrap justify-between gap-4 px-4 sm:px-6 lg:px-8 pb-8">
+<div class="flex min-w-72 flex-col gap-2">
+<p class="text-text-light dark:text-text-dark text-4xl font-black leading-tight tracking-[-0.033em]">Agricultural Reports</p>
+<p class="text-earthy-green dark:text-muted-green text-lg font-normal leading-normal">Detailed insights into crop yields, market trends, and scheme impacts.</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center gap-x-2 rounded-lg bg-accent-yellow text-white h-10 px-5 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90">
+<span class="material-symbols-outlined">download</span>
+                    Download PDF
+                </button>
+<button class="flex items-center justify-center gap-x-2 rounded-lg bg-muted-green text-white h-10 px-5 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90">
+<span class="material-symbols-outlined">upload</span>
+                    Export Data
+                </button>
+</div>
+</div>
+<div class="px-4 sm:px-6 lg:px-8 pb-8">
+<div class="flex flex-wrap gap-4 p-3 bg-white dark:bg-black/20 rounded-lg shadow-sm">
+<button class="flex h-10 flex-1 min-w-[150px] items-center justify-between gap-x-2 rounded-lg bg-background-light dark:bg-background-dark pl-4 pr-3">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal">Select Date Range</p>
+<span class="material-symbols-outlined text-text-light dark:text-text-dark">calendar_today</span>
+</button>
+<button class="flex h-10 flex-1 min-w-[150px] items-center justify-between gap-x-2 rounded-lg bg-background-light dark:bg-background-dark pl-4 pr-3">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal">Filter by Crop</p>
+<span class="material-symbols-outlined text-text-light dark:text-text-dark">arrow_drop_down</span>
+</button>
+<button class="flex h-10 flex-1 min-w-[150px] items-center justify-between gap-x-2 rounded-lg bg-background-light dark:bg-background-dark pl-4 pr-3">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal">Filter by Region</p>
+<span class="material-symbols-outlined text-text-light dark:text-text-dark">arrow_drop_down</span>
+</button>
+<button class="flex h-10 flex-1 min-w-[150px] items-center justify-between gap-x-2 rounded-lg bg-background-light dark:bg-background-dark pl-4 pr-3">
+<p class="text-text-light dark:text-text-dark text-sm font-medium leading-normal">Filter by Scheme</p>
+<span class="material-symbols-outlined text-text-light dark:text-text-dark">arrow_drop_down</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col gap-4 p-5 bg-white dark:bg-black/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-4xl text-earthy-green dark:text-muted-green">trending_up</span>
+<p class="text-text-light dark:text-text-dark text-lg font-bold leading-normal">Crop Yield Analysis</p>
+</div>
+<p class="text-earthy-green dark:text-muted-green/80 text-sm font-normal leading-normal">Insights into crop performance and yields.</p>
+<button class="mt-auto flex items-center justify-center rounded-lg bg-earthy-green/10 dark:bg-muted-green/20 text-earthy-green dark:text-muted-green h-9 px-4 text-sm font-bold hover:bg-earthy-green/20 dark:hover:bg-muted-green/30">View Report</button>
+</div>
+<div class="flex flex-col gap-4 p-5 bg-white dark:bg-black/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-4xl text-earthy-green dark:text-muted-green">price_check</span>
+<p class="text-text-light dark:text-text-dark text-lg font-bold leading-normal">Market Price Trends</p>
+</div>
+<p class="text-earthy-green dark:text-muted-green/80 text-sm font-normal leading-normal">Track and analyze market price fluctuations.</p>
+<button class="mt-auto flex items-center justify-center rounded-lg bg-earthy-green/10 dark:bg-muted-green/20 text-earthy-green dark:text-muted-green h-9 px-4 text-sm font-bold hover:bg-earthy-green/20 dark:hover:bg-muted-green/30">View Report</button>
+</div>
+<div class="flex flex-col gap-4 p-5 bg-white dark:bg-black/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-4xl text-earthy-green dark:text-muted-green">assessment</span>
+<p class="text-text-light dark:text-text-dark text-lg font-bold leading-normal">Scheme Impact Report</p>
+</div>
+<p class="text-earthy-green dark:text-muted-green/80 text-sm font-normal leading-normal">Understand the impact and utilization of schemes.</p>
+<button class="mt-auto flex items-center justify-center rounded-lg bg-earthy-green/10 dark:bg-muted-green/20 text-earthy-green dark:text-muted-green h-9 px-4 text-sm font-bold hover:bg-earthy-green/20 dark:hover:bg-muted-green/30">View Report</button>
+</div>
+<div class="flex flex-col gap-4 p-5 bg-white dark:bg-black/20 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-4xl text-earthy-green dark:text-muted-green">map</span>
+<p class="text-text-light dark:text-text-dark text-lg font-bold leading-normal">Regional Performance</p>
+</div>
+<p class="text-earthy-green dark:text-muted-green/80 text-sm font-normal leading-normal">Compare agricultural performance across regions.</p>
+<button class="mt-auto flex items-center justify-center rounded-lg bg-earthy-green/10 dark:bg-muted-green/20 text-earthy-green dark:text-muted-green h-9 px-4 text-sm font-bold hover:bg-earthy-green/20 dark:hover:bg-muted-green/30">View Report</button>
+</div>
+</div>
+<div class="px-4 sm:px-6 lg:px-8 pt-12">
+<h2 class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight tracking-[-0.015em] pb-6">Annual Crop Yield Comparison (2023 vs. 2024)</h2>
+<div class="bg-white dark:bg-black/20 p-6 rounded-xl shadow-md">
+<img alt="A bar chart comparing crop yields for Wheat, Corn, Rice, Soybean, and Barley between 2023 and 2024." class="w-full h-auto rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfdHC0PAqcw0tSjYZj65UPtGS5XyYpU2ilee7auSFWl8gOTIggmBepgMOO3DH4xhG9Kl1f8c-dRNDZR72OsYVXMHh65K2J6ZAnzFR1lbZBH1Aienywj9Zi2UokJ9B-twt1KAQjwWGhwZVCfB8MInBLg_Mb23tCTfRFnYe_4vLEKJvjk12kHCNNGVyV_4PmELycc3LsGvM8y3C7-q2bDrq84aVSRnru2fnNfSySugX3uhgSeFKmL5fU_T-Ei7UiYcoEXeP2Yz5I2Pvu"/>
+</div>
+</div>
+<div class="px-4 sm:px-6 lg:px-8 pt-12">
+<h2 class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight tracking-[-0.015em] pb-6">Detailed Data</h2>
+<div class="overflow-x-auto bg-white dark:bg-black/20 rounded-xl shadow-md">
+<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+<thead class="text-xs text-earthy-green dark:text-muted-green uppercase bg-earthy-green/10 dark:bg-muted-green/20">
+<tr>
+<th class="px-6 py-3" scope="col">Crop</th>
+<th class="px-6 py-3" scope="col">Region</th>
+<th class="px-6 py-3" scope="col">Yield 2023 (tons/ha)</th>
+<th class="px-6 py-3" scope="col">Yield 2024 (tons/ha)</th>
+<th class="px-6 py-3" scope="col">Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-border-light dark:border-border-dark">
+<th class="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap" scope="row">Wheat</th>
+<td class="px-6 py-4">North</td>
+<td class="px-6 py-4">4.0</td>
+<td class="px-6 py-4">7.0</td>
+<td class="px-6 py-4 text-green-500">+75%</td>
+</tr>
+<tr class="bg-earthy-green/5 dark:bg-muted-green/10 border-b border-border-light dark:border-border-dark">
+<th class="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap" scope="row">Corn</th>
+<td class="px-6 py-4">South</td>
+<td class="px-6 py-4">6.0</td>
+<td class="px-6 py-4">5.0</td>
+<td class="px-6 py-4 text-red-500">-16.7%</td>
+</tr>
+<tr class="border-b border-border-light dark:border-border-dark">
+<th class="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap" scope="row">Rice</th>
+<td class="px-6 py-4">East</td>
+<td class="px-6 py-4">8.0</td>
+<td class="px-6 py-4">6.0</td>
+<td class="px-6 py-4 text-red-500">-25%</td>
+</tr>
+<tr class="bg-earthy-green/5 dark:bg-muted-green/10 border-b border-border-light dark:border-border-dark">
+<th class="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap" scope="row">Soybean</th>
+<td class="px-6 py-4">West</td>
+<td class="px-6 py-4">2.0</td>
+<td class="px-6 py-4">4.0</td>
+<td class="px-6 py-4 text-green-500">+100%</td>
+</tr>
+<tr>
+<th class="px-6 py-4 font-medium text-text-light dark:text-text-dark whitespace-nowrap" scope="row">Barley</th>
+<td class="px-6 py-4">Central</td>
+<td class="px-6 py-4">5.0</td>
+<td class="px-6 py-4">9.0</td>
+<td class="px-6 py-4 text-green-500">+80%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<footer class="mt-12 py-8 px-4 sm:px-6 lg:px-8 border-t border-border-light dark:border-border-dark">
+<div class="flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<img alt="Illustration of a farmer in a field with a tablet." class="w-24 h-24 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApn1PFQPapX_lcqmjQyhlVEFTxf1vxFqojbXuWoGHrxMPbV2oJ8WL-UBGzgE4blK81QzXEV-DAwqQHm9SWygU2aTMLU7Q0JCuMvpW1qQIyCKLvNrP5yvXGD7A-bIktxmfqignkFGbkwj7kA-pIf_D6CreEaqduz3Ie2G-e-EvhUH7fZMsIpJgJA3hh6GEYIylVN1wPx06TDscsuk5i7yvRwy8qqf6KPSai_Lh4EhMOK3pxPeKbNE1PUpmUF93GEDBK4XcvtA3w1RBm"/>
+<div>
+<h3 class="text-lg font-bold text-earthy-green dark:text-muted-green">Empowering Farmers through One Digital Platform.</h3>
+<p class="text-sm text-text-light dark:text-text-dark/80">Access schemes, market data, and insights to grow your success.</p>
+</div>
+</div>
+<div class="text-sm text-text-light dark:text-text-dark/60">© 2024 AgriPlatform. All Rights Reserved.</div>
+</div>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<script>
+    // Simple script to toggle dark mode
+    const html = document.documentElement;
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+    // Check for saved theme in localStorage
+    if (localStorage.getItem('theme') === 'dark') {
+      html.classList.add('dark');
+    }
+
+    // No toggle button in this design, you can add one if needed and use this logic
+    // darkModeToggle.addEventListener('click', () => {
+    //   if (html.classList.contains('dark')) {
+    //     html.classList.remove('dark');
+    //     localStorage.setItem('theme', 'light');
+    //   } else {
+    //     html.classList.add('dark');
+    //     localStorage.setItem('theme', 'dark');
+    //   }
+    // });
+  </script>
+</body></html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agri-Maps — Fully Functional</title>
+
+  <!-- Tailwind + Fonts -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    :root { --primary:#54cf17; --bg-light:#f6f8f6; --bg-dark:#162111; }
+    body { font-family:'Public Sans',sans-serif; margin:0; height:100vh; overflow:hidden; }
+    #map { height:100%; width:100%; }
+    .nav-item { display:flex; align-items:center; gap:.6rem; padding:.45rem .75rem; border-radius:.5rem; cursor:pointer; }
+    .nav-item.active{ background:var(--primary); color:#121b0e; }
+    .panel { background:rgba(255,255,255,.95); padding:.6rem; border-radius:.6rem; box-shadow:0 6px 18px rgba(0,0,0,.08); }
+    .leaflet-popup-content-wrapper{ background:#ffffffcc; backdrop-filter:blur(6px); }
+    input[type=file]{ display:block; }
+    .small{ font-size:.85rem; }
+  </style>
+</head>
+
+<body class="bg-[var(--bg-light)] text-[#121b0e]">
+
+<div class="flex h-screen w-full">
+  <!-- Sidebar -->
+  <aside class="w-72 p-4 border-r border-gray-200 overflow-y-auto">
+    <div class="flex items-center gap-3 mb-4">
+      <div style="width:44px;height:44px;background-image:url('https://cdn-icons-png.flaticon.com/512/616/616408.png');background-size:cover;border-radius:8px"></div>
+      <div>
+        <div class="font-semibold">Agri-Maps</div>
+        <div class="text-sm text-[#67974e]">Live agricultural mapping</div>
+      </div>
+    </div>
+
+    <div class="space-y-3">
+      <div class="panel">
+        <div class="font-medium mb-2">Live Status</div>
+        <div id="status" class="small">Initializing…</div>
+        <div id="locationInfo" class="mt-2 small text-gray-700"></div>
+      </div>
+
+      <div class="panel">
+        <div class="font-medium mb-2">Weather (OpenWeather)</div>
+        <div class="small mb-2">Enter your API key:</div>
+        <input id="owmKey" class="w-full p-2 border rounded small" placeholder="OpenWeather API key"/>
+        <div id="weatherInfo" class="mt-2 small text-gray-700">Weather will appear after enabling Weather layer & location.</div>
+        <button id="loadWeatherBtn" class="mt-2 w-full bg-[var(--primary)] p-2 rounded font-semibold small">Load Weather Now</button>
+      </div>
+
+      <div class="panel">
+        <div class="font-medium mb-2">Soil / Irrigation Layers</div>
+        <div class="small mb-1">Upload Soil GeoJSON or paste a URL</div>
+        <input id="soilUpload" type="file" accept=".geojson,.json"/>
+        <input id="soilUrl" placeholder="https://.../soil.geojson" class="w-full p-2 border rounded small mt-2"/>
+
+        <div class="small mt-3 mb-1">Upload Irrigation/Crop GeoJSON</div>
+        <input id="irrUpload" type="file" accept=".geojson,.json"/>
+        <input id="irrUrl" placeholder="https://.../irrigation.geojson" class="w-full p-2 border rounded small mt-2"/>
+
+        <div class="flex gap-2 mt-3">
+          <button id="loadSoilBtn" class="flex-1 bg-gray-800 text-white p-2 rounded small">Load Soil</button>
+          <button id="loadIrrBtn" class="flex-1 bg-gray-800 text-white p-2 rounded small">Load Irrigation</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="font-medium mb-2">Layer Controls</div>
+        <label class="flex items-center gap-2"><input id="toggleSoil" type="checkbox" checked/> Show Soil</label>
+        <label class="flex items-center gap-2"><input id="toggleIrr" type="checkbox" checked/> Show Irrigation/Crops</label>
+        <label class="flex items-center gap-2"><input id="toggleWeather" type="checkbox"/> Show Weather</label>
+        <button id="exportVisible" class="w-full mt-3 bg-[var(--primary)] p-2 rounded font-semibold small">Export Visible GeoJSON</button>
+      </div>
+
+      <div class="panel small">
+        <div class="font-medium mb-1">Quick Actions</div>
+        <button id="centerToUser" class="w-full bg-gray-100 p-2 rounded small mb-2">Center to My Location</button>
+        <button id="openDirections" class="w-full bg-gray-100 p-2 rounded small">Open in Google Maps</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Map -->
+  <main class="flex-1 relative">
+    <header class="p-3 border-b border-gray-200 flex justify-between items-center">
+      <div class="font-semibold">Agricultural Map of India — Live</div>
+      <div class="small text-gray-600">Runs fully in your browser</div>
+    </header>
+    <div id="map" style="height:calc(100% - 56px)"></div>
+  </main>
+</div>
+
+<script>
+let OPENWEATHER_API_KEY = ""; 
+const MAP_CENTER = [22.9734, 78.6569];
+const MAP_ZOOM = 5;
+
+const map = L.map('map').setView(MAP_CENTER, MAP_ZOOM);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19, attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+const soilLayerGroup = L.geoJSON(null, { onEachFeature: onEachSoil, style: soilStyle }).addTo(map);
+const irrLayerGroup  = L.geoJSON(null, { onEachFeature: onEachIrr, style: irrStyle }).addTo(map);
+const weatherGroup = L.layerGroup().addTo(map);
+
+const statusEl = document.getElementById('status');
+function setStatus(t){ statusEl.textContent = t; }
+
+let userMarker=null, userCircle=null, userState=null;
+if ('geolocation' in navigator) {
+  navigator.geolocation.watchPosition(onPos, e=>setStatus("Location error: "+e.message), {enableHighAccuracy:true});
+} else setStatus('Geolocation not supported.');
+
+async function onPos(p){
+  const lat=p.coords.latitude, lon=p.coords.longitude, acc=p.coords.accuracy;
+  if (!userMarker){
+    userMarker=L.marker([lat,lon]).addTo(map).bindPopup('📍 You are here').openPopup();
+    userCircle=L.circle([lat,lon],{radius:acc,color:'#2563eb',fillOpacity:.2}).addTo(map);
+    map.setView([lat,lon],10);
+  } else {
+    userMarker.setLatLng([lat,lon]);
+    userCircle.setLatLng([lat,lon]).setRadius(acc);
+  }
+  setStatus(`Live location: ${lat.toFixed(3)}, ${lon.toFixed(3)}`);
+  const rev=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`); 
+  const j=await rev.json(); userState=j.address?.state||'Unknown';
+  document.getElementById('locationInfo').innerHTML=`Region: <b>${userState}</b>`;
+}
+
+/* WEATHER */
+document.getElementById('loadWeatherBtn').onclick=async()=>{
+  OPENWEATHER_API_KEY=document.getElementById('owmKey').value.trim()||OPENWEATHER_API_KEY;
+  if(!OPENWEATHER_API_KEY)return alert('Enter OpenWeather API key.');
+  if(!userMarker)return alert('Waiting for location.');
+  const {lat,lng}=userMarker.getLatLng();
+  await loadWeather(lat,lng,userState||'Your location');
+};
+async function loadWeather(lat,lon,label){
+  const res=await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${OPENWEATHER_API_KEY}`);
+  const d=await res.json();
+  const msg=`<b>${label}</b><br>🌡️ ${d.main.temp.toFixed(1)}°C<br>${d.weather[0].description}`;
+  L.marker([lat,lon]).bindPopup(msg).addTo(weatherGroup).openPopup();
+  document.getElementById('weatherInfo').innerHTML=`${label}: ${d.main.temp.toFixed(1)}°C, ${d.weather[0].main}`;
+}
+
+/* SOIL + IRRIGATION */
+function soilStyle(f){ return {color:soilColor(f.properties?.soil||''), weight:1, fillOpacity:.5}; }
+function soilColor(s){ s=s.toLowerCase(); if(s.includes('alluvial'))return'#4ade80'; if(s.includes('black'))return'#78350f'; if(s.includes('red'))return'#ef4444'; return'#9ca3af'; }
+function onEachSoil(f,l){ l.bindPopup(`<b>${f.properties?.soil||'Soil type'}</b><br>${Object.entries(f.properties||{}).map(([k,v])=>`${k}: ${v}`).join('<br>')}`); }
+
+function irrStyle(f){ return {color:'#3b82f6',weight:1,fillOpacity:.25}; }
+function onEachIrr(f,l){ l.bindPopup(`<b>${f.properties?.crop||'Crop info'}</b><br>${Object.entries(f.properties||{}).map(([k,v])=>`${k}: ${v}`).join('<br>')}`); }
+
+async function loadGeo(url,layer,label){
+  const r=await fetch(url); const j=await r.json();
+  layer.clearLayers(); layer.addData(j); map.fitBounds(layer.getBounds());
+  setStatus(label+' layer loaded');
+}
+
+/* Controls */
+document.getElementById('loadSoilBtn').onclick=async()=>{
+  const file=document.getElementById('soilUpload').files[0];
+  if(file){const t=await file.text(); soilLayerGroup.clearLayers(); soilLayerGroup.addData(JSON.parse(t));}
+  else if(document.getElementById('soilUrl').value.trim()) await loadGeo(document.getElementById('soilUrl').value,soilLayerGroup,'Soil');
+};
+document.getElementById('loadIrrBtn').onclick=async()=>{
+  const file=document.getElementById('irrUpload').files[0];
+  if(file){const t=await file.text(); irrLayerGroup.clearLayers(); irrLayerGroup.addData(JSON.parse(t));}
+  else if(document.getElementById('irrUrl').value.trim()) await loadGeo(document.getElementById('irrUrl').value,irrLayerGroup,'Irrigation');
+};
+
+/* Toggles */
+document.getElementById('toggleSoil').onchange=e=>{e.target.checked?map.addLayer(soilLayerGroup):map.removeLayer(soilLayerGroup)};
+document.getElementById('toggleIrr').onchange=e=>{e.target.checked?map.addLayer(irrLayerGroup):map.removeLayer(irrLayerGroup)};
+document.getElementById('toggleWeather').onchange=e=>{e.target.checked?map.addLayer(weatherGroup):map.removeLayer(weatherGroup)};
+
+/* Export visible */
+document.getElementById('exportVisible').onclick=()=>{
+  const feats=[]; soilLayerGroup.eachLayer(l=>feats.push(l.toGeoJSON())); irrLayerGroup.eachLayer(l=>feats.push(l.toGeoJSON()));
+  if(!feats.length)return alert('Nothing to export.');
+  const blob=new Blob([JSON.stringify({type:'FeatureCollection',features:feats})],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='agri_layers.geojson'; a.click();
+};
+
+/* Quick actions */
+document.getElementById('centerToUser').onclick=()=>{if(userMarker)map.setView(userMarker.getLatLng(),12)};
+document.getElementById('openDirections').onclick=()=>{if(userMarker){const {lat,lng}=userMarker.getLatLng();window.open(`https://www.google.com/maps/dir/?api=1&origin=${lat},${lng}`)}};
+
+setStatus('Ready — enable location & add API key for weather.');
+</script>
+</body>
+</html>

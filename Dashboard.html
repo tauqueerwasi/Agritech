@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Agriculture Platform</title>
+
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#54cf17",
+            "background-light": "#f6f8f6",
+            "background-dark": "#162111",
+          },
+          fontFamily: {
+            "display": ["Public Sans", "sans-serif"]
+          },
+        },
+      },
+    };
+
+    // Initialize AOS
+    window.onload = () => {
+      AOS.init({
+        duration: 1000,
+        once: false,
+        offset: 100,
+      });
+    };
+  </script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-[#121b0e] dark:text-background-light transition-colors duration-300">
+  <div class="relative flex min-h-screen flex-col overflow-x-hidden">
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 backdrop-blur bg-white/70 dark:bg-background-dark/70 border-b border-primary/10 px-6 sm:px-10 py-3 transition-all duration-300">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="text-primary text-3xl font-black">🌾</div>
+          <h2 class="text-lg font-bold">Agri-Tech</h2>
+        </div>
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+          <a href="Schemes.html" class="hover:text-primary transition">Schemes</a>
+          <a href="Mandiprice.html" class="hover:text-primary transition">MandiPrice</a>
+          <a href="Map.html" class="hover:text-primary transition">Map</a>
+          <a href="Statistics.html" class="hover:text-primary transition">Statistics</a>
+          <a href="Report.html" class="hover:text-primary transition">Report</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <input placeholder="Search..." class="hidden sm:block rounded-lg px-3 py-2 bg-[#ebf3e7] dark:bg-primary/20 text-sm focus:ring-2 focus:ring-primary outline-none" />
+          <button class="p-2 rounded-lg bg-[#ebf3e7] dark:bg-primary/20 hover:bg-primary/30 transition">
+            <span class="material-symbols-outlined">notifications</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="pt-24 space-y-16">
+
+      <!-- HERO SECTION -->
+      <section class="relative bg-cover bg-center min-h-[480px] flex flex-col justify-center items-center text-center"
+        style="background-image:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.6)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuANVCkXZN1qlSmjzksYdWCEOgs0UtWCOSQEycjuEAcx_X6JSynPWG-Ag3Q1we5nxwkOXId3jZi8eqxOzyO338tmiEh63YAPytqtlwHRlXsk_7-SZKaADYfz18S0qh3af5dTXsD4YD0tkAo1A_3GDKEJSX2SUqH2Ds1vlDA-CnouQCp7O1AR8zdvwflY1oppR92TsNxwh3axpfc7MfYHIEgEaAWkZTBdGi6yef3cEvoxq40M3_-Fs0QNHM4MBzw7R6MlEUtsjQs-bcFl');"
+        data-aos="fade-up">
+        <h1 class="text-white text-4xl md:text-5xl font-extrabold tracking-tight mb-4">Empowering Farmers through One Digital Platform</h1>
+        <p class="text-white/90 text-base md:text-lg mb-6 max-w-2xl">Access government schemes, subsidies, and agricultural market services all in one place.</p>
+        <a href="#quick-access" class="bg-primary text-background-dark px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition">Explore Schemes</a>
+      </section>
+
+      <!-- QUICK ACCESS -->
+      <section id="quick-access" class="px-6 md:px-20" data-aos="fade-up">
+        <h2 class="text-2xl font-bold mb-6">Quick Access</h2>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div data-aos="zoom-in" class="group bg-white dark:bg-background-dark border border-gray-200 dark:border-primary/20 rounded-xl p-6 flex flex-col items-center shadow hover:shadow-lg transition-transform duration-300 hover:-translate-y-1">
+            <img class="w-24 h-24 rounded-full object-cover mb-3"
+              src="https://cdn-icons-png.flaticon.com/512/2907/2907253.png" alt="">
+            <p class="text-lg font-medium group-hover:text-primary">Apply for Subsidy</p>
+          </div>
+
+          <div data-aos="zoom-in" data-aos-delay="100" class="group bg-white dark:bg-background-dark border border-gray-200 dark:border-primary/20 rounded-xl p-6 flex flex-col items-center shadow hover:shadow-lg transition-transform duration-300 hover:-translate-y-1">
+            <img class="w-24 h-24 rounded-full object-cover mb-3"
+              src="https://cdn-icons-png.flaticon.com/512/990/990967.png" alt="">
+            <p class="text-lg font-medium group-hover:text-primary">Find Local Market</p>
+          </div>
+
+          <div data-aos="zoom-in" data-aos-delay="200" class="group bg-white dark:bg-background-dark border border-gray-200 dark:border-primary/20 rounded-xl p-6 flex flex-col items-center shadow hover:shadow-lg transition-transform duration-300 hover:-translate-y-1">
+            <img class="w-24 h-24 rounded-full object-cover mb-3"
+              src="https://cdn-icons-png.flaticon.com/512/1027/1027125.png" alt="">
+            <p class="text-lg font-medium group-hover:text-primary">Contact Support</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- INFORMATION HUB -->
+      <section class="px-6 md:px-20 grid lg:grid-cols-3 gap-8 items-start">
+        <!-- Left -->
+        <div class="lg:col-span-2 flex flex-col gap-6">
+          <div data-aos="fade-up" class="bg-white dark:bg-background-dark rounded-xl shadow p-6 border border-gray-200 dark:border-primary/20">
+            <h3 class="text-xl font-bold mb-4">Latest Schemes</h3>
+            <ul class="space-y-3">
+              <li><a href="#" class="text-primary font-medium hover:underline">Pradhan Mantri Fasal Bima Yojana</a><p class="text-sm text-gray-600 dark:text-gray-400">Crop insurance for farmers.</p></li>
+              <li><a href="#" class="text-primary font-medium hover:underline">Kisan Credit Card</a><p class="text-sm text-gray-600 dark:text-gray-400">Credit support for small farmers.</p></li>
+            </ul>
+          </div>
+
+          <div data-aos="fade-up" data-aos-delay="100" class="bg-white dark:bg-background-dark rounded-xl shadow p-6 border border-gray-200 dark:border-primary/20">
+            <h3 class="text-xl font-bold mb-4">News & Updates</h3>
+            <div class="space-y-4">
+              <div class="flex gap-4 items-start">
+                <img src="https://cdn-icons-png.flaticon.com/512/992/992700.png" class="w-16 h-16 rounded-lg" alt="">
+                <div>
+                  <h4 class="font-semibold">New Tractor Subsidy Announced</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">Government introduces new subsidy for small farmers.</p>
+                </div>
+              </div>
+              <div class="flex gap-4 items-start">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="w-16 h-16 rounded-lg" alt="">
+                <div>
+                  <h4 class="font-semibold">Organic Farming Workshop</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">Join free online session this weekend.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weather -->
+        <div data-aos="fade-left" class="bg-white dark:bg-background-dark rounded-xl shadow p-6 border border-gray-200 dark:border-primary/20">
+          <h3 class="text-xl font-bold mb-4">Weather Alerts</h3>
+          <div class="text-center mb-4">
+            <span class="material-symbols-outlined text-yellow-500 text-6xl">wb_sunny</span>
+            <p class="text-4xl font-bold mt-2">28°C</p>
+            <p class="text-gray-500 text-sm">Sunny • Pune, Maharashtra</p>
+          </div>
+          <hr class="my-4 border-gray-300 dark:border-gray-700" />
+          <div class="grid grid-cols-4 text-center text-sm gap-2">
+            <div><p class="font-semibold">Mon</p><span class="material-symbols-outlined text-yellow-500">wb_sunny</span><p>29°</p></div>
+            <div><p class="font-semibold">Tue</p><span class="material-symbols-outlined text-blue-500">cloudy</span><p>27°</p></div>
+            <div><p class="font-semibold">Wed</p><span class="material-symbols-outlined text-gray-500">water_drop</span><p>26°</p></div>
+            <div><p class="font-semibold">Thu</p><span class="material-symbols-outlined text-yellow-500">wb_sunny</span><p>30°</p></div>
+          </div>
+          <div class="bg-red-100 dark:bg-red-900/40 border-l-4 border-red-600 p-3 mt-4 rounded">
+            <p class="text-sm font-semibold text-red-700 dark:text-red-200">⚠ High Winds Expected</p>
+            <p class="text-xs text-red-600 dark:text-red-300">Secure crops and equipment until tomorrow evening.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-100 dark:bg-primary/10 mt-20 py-8 px-6 text-sm" data-aos="fade-up">
+      <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="font-bold text-lg">Agri-Platform</h3>
+          <p class="text-gray-600 dark:text-gray-400 mt-2">Empowering farmers with technology and information.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2">Quick Links</h4>
+          <ul class="space-y-1">
+            <li><a href="#" class="hover:text-primary">About Us</a></li>
+            <li><a href="#" class="hover:text-primary">Contact</a></li>
+            <li><a href="#" class="hover:text-primary">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2">Resources</h4>
+          <ul class="space-y-1">
+            <li><a href="#" class="hover:text-primary">Blog</a></li>
+            <li><a href="#" class="hover:text-primary">Help Center</a></li>
+            <li><a href="#" class="hover:text-primary">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-2">Follow Us</h4>
+          <div class="flex gap-4 text-gray-600 dark:text-gray-400">
+            <a href="#" class="hover:text-primary"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="hover:text-primary"><i class="fab fa-facebook"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-8 text-gray-500 border-t pt-4">
+        © 2024 Agri-Platform. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Go to top"
+      class="fixed bottom-6 right-6 z-50 bg-primary text-white rounded-full p-3 shadow-lg hover:bg-primary/90 transition-all duration-300 opacity-0 pointer-events-none">
+      <span class="material-symbols-outlined text-[28px]">arrow_upward</span>
+    </button>
+
+  </div>
+
+  <!-- Scroll Script -->
+  <script>
+    const scrollBtn = document.getElementById("scrollToTopBtn");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        scrollBtn.classList.remove("opacity-0", "pointer-events-none");
+        scrollBtn.classList.add("opacity-100");
+      } else {
+        scrollBtn.classList.add("opacity-0", "pointer-events-none");
+        scrollBtn.classList.remove("opacity-100");
+      }
+    });
+
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

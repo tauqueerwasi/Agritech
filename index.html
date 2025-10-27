@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Farmer Login</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Tailwind Custom Config -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#17cf17",
+            "background-light": "#f6f8f6",
+            "background-dark": "#112111",
+            "text-light": "#111811",
+            "text-dark": "#e8f3e8",
+            "text-muted-light": "#638863",
+            "text-muted-dark": "#8caa8c",
+            "field-light": "#f0f4f0",
+            "field-dark": "#1a2c1a"
+          },
+          fontFamily: {
+            display: ["Public Sans", "sans-serif"]
+          },
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "1rem",
+            xl: "1.5rem",
+            full: "9999px"
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+
+<body class="font-display">
+
+  <div
+    class="relative flex min-h-screen w-full flex-col items-center justify-center bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark overflow-x-hidden p-4">
+
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 z-0 opacity-10 dark:opacity-5">
+      <svg class="object-cover" height="100%" preserveaspectratio="none" viewBox="0 0 1440 800" width="100%"
+        xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="a" width="40" height="40" patternTransform="scale(2)" patternUnits="userSpaceOnUse">
+            <path d="M40 40H0V0h40v40z" fill="none"></path>
+            <path
+              d="M11.5 29.5a1 1 0 01-1-1v-2l-7-4-1 2v4a1 1 0 01-1 1H0V0h1.5a1 1 0 011 1v6l8-4 1 2v2l-8 4v2l8 4v2l-1 2-8-4v6a1 1 0 01-1 1h-1.5v9.5zM40 40V29.5a1 1 0 00-1-1h-6l4-7-2-1h-2l-4 7v-2l-4-8-2-1h-2l-4 8v-2l-4-7-2-1h-2l-4 7h-6a1 1 0 00-1 1V40h40z"
+              fill="#17cf17"></path>
+          </pattern>
+        </defs>
+        <rect fill="url(#a)" height="100%" width="100%"></rect>
+      </svg>
+    </div>
+
+    <!-- Login Box -->
+    <div class="relative z-10 flex w-full max-w-md flex-col items-center justify-center bg-white/90 dark:bg-[#1b2a1b]/70 backdrop-blur-md p-8 rounded-2xl shadow-lg">
+
+      <!-- Logo -->
+      <div class="mb-6 flex flex-col items-center">
+        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/20 mb-4">
+          <span class="material-symbols-outlined text-4xl text-primary">agriculture</span>
+        </div>
+        <h1 class="text-3xl font-bold tracking-tight text-text-light dark:text-text-dark">Agri-Connect</h1>
+      </div>
+
+      <!-- Headline -->
+      <div class="w-full text-center mb-8">
+        <h2 class="text-[28px] font-bold leading-tight">Welcome Back!</h2>
+        <p class="text-text-muted-light dark:text-text-muted-dark text-base pt-1">Login to your account to continue</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="w-full space-y-4">
+        <!-- Mobile Number -->
+        <div class="flex flex-col">
+          <label class="text-base font-medium pb-2" for="mobile">Mobile Number</label>
+          <div class="relative flex items-stretch">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+              <span class="material-symbols-outlined text-text-muted-light dark:text-text-muted-dark">phone_iphone</span>
+            </div>
+            <input id="mobile" type="tel" placeholder="Enter your mobile number"
+              class="form-input w-full h-14 rounded-xl bg-field-light dark:bg-field-dark pl-12 pr-4 text-base border-none focus:ring-2 focus:ring-primary/50"
+              required />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="flex flex-col">
+          <label class="text-base font-medium pb-2" for="password">Password</label>
+          <div class="relative flex items-stretch">
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+              <span class="material-symbols-outlined text-text-muted-light dark:text-text-muted-dark">lock</span>
+            </div>
+            <input id="password" type="password" placeholder="Enter your password"
+              class="form-input w-full h-14 rounded-xl bg-field-light dark:bg-field-dark pl-12 pr-12 text-base border-none focus:ring-2 focus:ring-primary/50"
+              required />
+            <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 flex items-center pr-4">
+              <span class="material-symbols-outlined text-text-muted-light dark:text-text-muted-dark" id="eyeIcon">visibility_off</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Forgot Password -->
+        <div class="w-full text-right pt-1">
+          <a href="#" class="text-primary text-sm font-medium underline hover:no-underline">Forgot Password?</a>
+        </div>
+
+        <!-- Login Button -->
+        <div class="pt-8 pb-6">
+          <button type="submit"
+            class="flex w-full h-14 items-center justify-center rounded-xl bg-primary text-white text-lg font-bold hover:scale-[1.02] active:scale-[0.98] transition-transform">
+            Login
+          </button>
+        </div>
+      </form>
+
+      <!-- Register -->
+      <div class="w-full text-center">
+        <p class="text-text-muted-light dark:text-text-muted-dark text-base">
+          Don't have an account?
+          <a href="#" class="font-bold text-primary hover:underline">Register</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Logic -->
+  <script>
+    // Password visibility toggle
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("password");
+    const eyeIcon = document.getElementById("eyeIcon");
+
+    togglePassword.addEventListener("click", () => {
+      const isHidden = passwordInput.type === "password";
+      passwordInput.type = isHidden ? "text" : "password";
+      eyeIcon.textContent = isHidden ? "visibility" : "visibility_off";
+    });
+
+    // Login validation and redirect
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const mobile = document.getElementById("mobile").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (mobile === "" || password === "") {
+        alert("Please enter both mobile number and password!");
+        return;
+      }
+
+      // Simulate success login
+      alert("Login successful!");
+      window.location.href = "dashboard.html"; // Redirect to dashboard
+    });
+  </script>
+
+</body>
+</html>
