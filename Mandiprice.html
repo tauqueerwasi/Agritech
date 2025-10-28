@@ -1,22 +1,26 @@
 <!DOCTYPE html>
+<html lang="en" class="light">
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>AgriConnect - Live Mandi Prices</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-<script id="tailwind-config">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriConnect - Live Mandi Prices</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
           colors: {
-            "primary": "#2A6041",
-            "primary-light": "rgba(42, 96, 65, 0.2)",
-            "secondary": "#A07855",
-            "accent": "#FFC107",
+            primary: "#2A6041",
+            "primary-light": "rgba(42,96,65,0.2)",
+            secondary: "#A07855",
+            accent: "#FFC107",
             "background-light": "#F5F5DC",
             "background-dark": "#1C1C1A",
             "text-light": "#121b0e",
@@ -24,215 +28,232 @@
             "border-light": "#D7E7D0",
             "border-dark": "#3a3a3a",
           },
-          fontFamily: {
-            "display": ["Public Sans"]
-          },
-          borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          fontFamily: { display: ["Public Sans"] },
         },
       },
-    }
+    };
   </script>
-<style>
+
+  <style>
     .material-symbols-outlined {
       font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
     }
+
     select {
-      --select-button-svg: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724px%27 height=%2724px%27 fill=%27rgb(160,120,85)%27 viewBox=%270 0 256 256%27%3e%3cpath d=%27M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z%27%3e%3c/path%3e%3c/svg%3e');
-      background-image: var(--select-button-svg);
+      background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 fill=%27rgb(160,120,85)%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M7 10l5 5 5-5z%27/%3E%3C/svg%3E');
       background-position: right 0.75rem center;
       background-repeat: no-repeat;
       background-size: 1.5em;
-      -webkit-appearance: none;
-      -moz-appearance: none;
       appearance: none;
       padding-right: 2.5rem;
     }
   </style>
 </head>
+
 <body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
-<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
-<div class="layout-container flex h-full grow flex-col">
-<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark px-6 md:px-10 lg:px-20 py-4 bg-white dark:bg-background-dark">
-<div class="flex items-center gap-4 text-primary">
-<span class="material-symbols-outlined text-3xl">grass</span>
-<h2 class="text-primary text-xl font-bold leading-tight tracking-[-0.015em]">AgriConnect</h2>
-</div>
-<nav class="hidden md:flex items-center gap-9">
-<a class="text-text-light dark:text-text-dark text-base font-medium leading-normal" href="code1.html">Dashboard</a>
-<a class="text-text-light dark:text-text-dark text-base font-medium leading-normal" href="#">Schemes</a>
-<a class="text-primary text-base font-bold leading-normal" href="#">Mandi Prices</a>
-</nav>
-<div class="flex items-center gap-4">
-<button class="flex items-center justify-center rounded-full h-10 w-10 bg-primary-light text-primary">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASgRG2x96hDeTX2VIsBwrlbCSjpqvd8qJTTG7Ld1k6DyNgcBvUe9p-lYHt6Kms7rvqMRovH3H3OMjtywn1zY-EjoT6ZEQJ70fLUFFWno_tHE88X0jQ3keZyF1nzTfmxrkS8VulsID2bw3fb1GKCXz3SN_N814xQ_2_OIIiiIctJXredlxGLhakCMlMfI7cdPz1_BvpBmfpiU-CtkkwffoXH4drr31kO0W5X5aZAYsJQF_TaSaKi6mBk6kDRJsF4gw82n9h-XRY6lET");'></div>
-</div>
-</header>
-<main class="flex-1 px-6 md:px-10 lg:px-20 py-8">
-<div class="flex flex-col lg:flex-row gap-8">
-<!-- Left Column: Filters -->
-<aside class="w-full lg:w-1/3 xl:w-1/4">
-<div class="bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-sm">
-<h3 class="text-xl font-bold mb-6 text-text-light dark:text-text-dark">Find Best Prices</h3>
-<div class="space-y-6">
-<div>
-<label class="flex flex-col min-w-40 w-full" for="crop-search">
-<div class="flex w-full flex-1 items-stretch rounded-lg h-12">
-<div class="text-secondary flex border-none bg-background-light dark:bg-zinc-700 items-center justify-center pl-4 rounded-l-lg border-r-0">
-<span class="material-symbols-outlined">search</span>
-</div>
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border-none bg-background-light dark:bg-zinc-700 focus:border-none h-full placeholder:text-secondary px-4 pl-2 text-base font-normal leading-normal" id="crop-search" placeholder="Search for a crop" value=""/>
-</div>
-</label>
-</div>
-<div>
-<label class="flex flex-col min-w-40 flex-1">
-<p class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">Select State</p>
-<select class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-border-light dark:border-border-dark bg-background-light dark:bg-zinc-700 focus:border-primary h-14 p-[15px] text-base font-normal leading-normal">
-<option>Madhya Pradesh</option>
-<option>Uttar Pradesh</option>
-<option>Punjab</option>
-</select>
-</label>
-</div>
-<div>
-<label class="flex flex-col min-w-40 flex-1">
-<p class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">Select District</p>
-<select class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-border-light dark:border-border-dark bg-background-light dark:bg-zinc-700 focus:border-primary h-14 p-[15px] text-base font-normal leading-normal">
-<option>Indore</option>
-<option>Bhopal</option>
-<option>Jabalpur</option>
-</select>
-</label>
-</div>
-<div>
-<label class="flex flex-col min-w-40 flex-1">
-<p class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">Select Mandi</p>
-<select class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-border-light dark:border-border-dark bg-background-light dark:bg-zinc-700 focus:border-primary h-14 p-[15px] text-base font-normal leading-normal">
-<option>Indore Mandi</option>
-<option>Choithram Mandi</option>
-</select>
-</label>
-</div>
-<div>
-<p class="text-text-light dark:text-text-dark text-base font-medium leading-normal pb-2">Filter by Crop Type</p>
-<div class="flex flex-wrap gap-2">
-<label class="flex items-center gap-2 cursor-pointer">
-<input checked="" class="form-radio text-primary focus:ring-primary" name="cropType" type="radio"/>
-<span class="text-sm">All</span>
-</label>
-<label class="flex items-center gap-2 cursor-pointer">
-<input class="form-radio text-primary focus:ring-primary" name="cropType" type="radio"/>
-<span class="text-sm">Grains</span>
-</label>
-<label class="flex items-center gap-2 cursor-pointer">
-<input class="form-radio text-primary focus:ring-primary" name="cropType" type="radio"/>
-<span class="text-sm">Vegetables</span>
-</label>
-<label class="flex items-center gap-2 cursor-pointer">
-<input class="form-radio text-primary focus:ring-primary" name="cropType" type="radio"/>
-<span class="text-sm">Fruits</span>
-</label>
-</div>
-</div>
-<button class="w-full flex items-center justify-center rounded-lg h-12 bg-primary text-white gap-2 text-base font-bold leading-normal tracking-[0.015em]">
-                Apply Filters
-              </button>
-</div>
-</div>
-</aside>
-<!-- Right Column: Price Display -->
-<section class="w-full lg:w-2/3 xl:w-3/4">
-<div class="flex flex-wrap justify-between items-center gap-4 mb-6">
-<div class="flex flex-col">
-<h1 class="text-text-light dark:text-text-dark text-4xl font-black leading-tight tracking-[-0.033em]">Live Mandi Prices</h1>
-<p class="text-secondary text-base font-normal leading-normal">Find the best prices for your crops</p>
-</div>
-<div class="flex items-center gap-2 p-1 rounded-lg bg-background-light dark:bg-zinc-700 border border-border-light dark:border-border-dark">
-<button class="px-3 py-1.5 rounded-md bg-primary text-white text-sm"><span class="material-symbols-outlined text-base align-middle">grid_view</span> Card</button>
-<button class="px-3 py-1.5 rounded-md text-secondary text-sm"><span class="material-symbols-outlined text-base align-middle">table_rows</span> Table</button>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-<!-- Crop Card 1 -->
-<div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-5 flex flex-col gap-4">
-<div class="flex items-center gap-4">
-<img class="w-12 h-12 rounded-full p-2 bg-primary-light" data-alt="Wheat icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgU0b7fG1Xrfpl2O0vWkHPQSx1C-L4cm-PHhV9_jOZI-Wq6MRwOaClb1gH0Jy2ctcaSzg6iNsehPUuUkMZPoZOAIBnE1WLxSQXt-I5W4dqnERR6iRZ5RUubEjkBTswXvmea_L4Ul2iai0GNcU8ZWKpJkPy1uSFCHGvBtA8rmbGUiavw3mFTWIRtZoSkxqODfm0H_h94LH5CE3mCLveGvaji6hQTTwRVJUOkAgo2pEMtA8wipHsdrvxrkbskZlPT7jaImXpkAjRHFjy"/>
-<div>
-<h4 class="text-xl font-bold text-text-light dark:text-text-dark">Wheat</h4>
-<p class="text-sm text-secondary">Indore Mandi, Madhya Pradesh</p>
-</div>
-</div>
-<div>
-<p class="text-3xl font-black text-primary">₹2,500 <span class="text-base font-medium text-secondary">/ Quintal</span></p>
-<div class="flex items-center text-green-600 dark:text-green-400 mt-1">
-<span class="material-symbols-outlined">arrow_upward</span>
-<p class="text-sm font-medium">₹50</p>
-</div>
-</div>
-<p class="text-xs text-secondary mt-auto text-right">Updated: 2 minutes ago</p>
-</div>
-<!-- Crop Card 2 -->
-<div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-5 flex flex-col gap-4">
-<div class="flex items-center gap-4">
-<img class="w-12 h-12 rounded-full p-2 bg-primary-light" data-alt="Tomato icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKPTFQnUzftlUtp9KMxY8SiKfl1RRb3LmZ9c0LyyzklUEhX1D3juk5GQD-MKdV9Hr7VtYl1gmw2XI1H8QD7zn4_UV_FpPUPq1ch3E3GCs8XjxaMM6NyyyVgZtvPP-QAEc2QnQWMSgJvqdW98N-HtOpRDgPBO6A7kd6_OINuJ8TUc9anvVXZyAQ9iRwWP7_G2eHfDYIDKRqJM2rReyIhqzcN5dJqeTqKsMLSUlaYIxP3FTwLfUENlST0sYjjL3Mwy2TU3EIE9bmYJsM"/>
-<div>
-<h4 class="text-xl font-bold text-text-light dark:text-text-dark">Tomato</h4>
-<p class="text-sm text-secondary">Indore Mandi, Madhya Pradesh</p>
-</div>
-</div>
-<div>
-<p class="text-3xl font-black text-primary">₹1,800 <span class="text-base font-medium text-secondary">/ Quintal</span></p>
-<div class="flex items-center text-red-600 dark:text-red-400 mt-1">
-<span class="material-symbols-outlined">arrow_downward</span>
-<p class="text-sm font-medium">₹25</p>
-</div>
-</div>
-<p class="text-xs text-secondary mt-auto text-right">Updated: 5 minutes ago</p>
-</div>
-<!-- Crop Card 3 -->
-<div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-5 flex flex-col gap-4">
-<div class="flex items-center gap-4">
-<img class="w-12 h-12 rounded-full p-2 bg-primary-light" data-alt="Soybean icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClQq8UEBJFiq2I6xlP5KUHxGJ96DWX2w9ZHSjm0qawTuyGAUz5ys8s_uuB3uA2ShJtf66hOVpGctQuxQ4nAIJSWZEsGIGzuTvoDPG_M3sUjscRUXmSu8hUcnsLmX26-3LwadniRCPoIVK72Ffil5VphJgEvIoB9zwrUQZwW8y4FsNaWYr-N8poa-Y_-q_l38n0ZYgPE0QZwseDec3pz_l36zSP7Q-8wg068ZAX_oMirolwcpn3UgQGHcAWPdlZxRgNnhBW1nbKF7vo"/>
-<div>
-<h4 class="text-xl font-bold text-text-light dark:text-text-dark">Soybean</h4>
-<p class="text-sm text-secondary">Indore Mandi, Madhya Pradesh</p>
-</div>
-</div>
-<div>
-<p class="text-3xl font-black text-primary">₹4,200 <span class="text-base font-medium text-secondary">/ Quintal</span></p>
-<div class="flex items-center text-green-600 dark:text-green-400 mt-1">
-<span class="material-symbols-outlined">arrow_upward</span>
-<p class="text-sm font-medium">₹100</p>
-</div>
-</div>
-<p class="text-xs text-secondary mt-auto text-right">Updated: 10 minutes ago</p>
-</div>
-<!-- Empty State Card -->
-<div class="md:col-span-2 xl:col-span-3 bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-8 flex flex-col items-center justify-center text-center gap-4">
-<img class="w-40 h-40" data-alt="Empty market cart illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_dpkHx2zzMPahYN0womWMwsVy4kFu-PeHLSf7q7ZYmZDw_ei-NTXoj-4IpiJAWVreSeUJ1_Ydk34n6xIgyEf5o3f9uAVwcURXE3gIk21C5LZ21ffog3_FgcigV8RDOm0_Jx1pkxqai1ghdP4bfNihoJCfAYfw8Je7F2cfZS6UVQxzm3gQxAvtTeBVR-gnxe9Lm8ud72V5Tldcuqr28c7bE6Yb-kMCaQBQK0Bmg1GlPQONQgLKjIOS9HTQfI2P_w0i3kdWdsLmoG4z"/>
-<h4 class="text-lg font-bold text-text-light dark:text-text-dark">No Prices Found</h4>
-<p class="text-secondary max-w-xs">No prices were found for your current selection. Please try adjusting your filters to see results.</p>
-</div>
-</div>
-</section>
-</div>
-</main>
-<footer class="mt-16 border-t border-solid border-border-light dark:border-border-dark px-6 md:px-10 lg:px-20 py-6 text-center text-secondary text-sm">
-<div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-<p>© 2024 AgriConnect. All rights reserved.</p>
-<div class="flex gap-6">
-<a class="hover:text-primary" href="#">Help &amp; Support</a>
-<a class="hover:text-primary" href="#">Terms of Service</a>
-<a class="hover:text-primary" href="#">Contact Us</a>
-</div>
-</div>
-</footer>
-</div>
-</div>
-</body></html>
+  <div class="flex flex-col min-h-screen">
+    <!-- HEADER -->
+    <header class="flex items-center justify-between border-b border-border-light dark:border-border-dark px-6 py-4 bg-white dark:bg-background-dark">
+      <div class="flex items-center gap-3 text-primary">
+        <span class="material-symbols-outlined text-3xl">grass</span>
+        <h2 class="text-xl font-bold">AgriConnect</h2>
+      </div>
+
+      <button id="mobileMenuBtn" class="md:hidden p-2 rounded-md border border-border-light">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+
+      <nav id="navMenu" class="hidden md:flex items-center gap-8">
+        <a href="Dashboard.html" class="hover:text-primary">Dashboard</a>
+        <a href="#" class="hover:text-primary">Schemes</a>
+        <a href="#" class="text-primary font-bold">Mandi Prices</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <button class="rounded-full h-10 w-10 bg-primary-light text-primary flex items-center justify-center">
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <div class="bg-center bg-cover rounded-full size-10"
+          style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASgRG2x96hDeTX2VIsBwrlbCSjpqvd8qJTTG7Ld1k6DyNgcBvUe9p-lYHt6Kms7rvqMRovH3H3OMjtywn1zY-EjoT6ZEQJ70fLUFFWno_tHE88X0jQ3keZyF1nzTfmxrkS8VulsID2bw3fb1GKCXz3SN_N814xQ_2_OIIiiIctJXredlxGLhakCMlMfI7cdPz1_BvpBmfpiU-CtkkwffoXH4drr31kO0W5X5aZAYsJQF_TaSaKi6mBk6kDRJsF4gw82n9h-XRY6lET");'>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="flex-1 px-6 md:px-10 lg:px-20 py-8">
+      <div class="flex flex-col lg:flex-row gap-8">
+
+        <!-- FILTERS -->
+        <aside class="w-full lg:w-1/3 xl:w-1/4 bg-white dark:bg-zinc-800 p-6 rounded-lg shadow-sm">
+          <h3 class="text-xl font-bold mb-6">Find Best Prices</h3>
+          <div class="space-y-5">
+            <div>
+              <input id="cropSearch" placeholder="Search for a crop"
+                class="w-full h-12 px-4 rounded-lg bg-background-light dark:bg-zinc-700 border-none focus:ring-2 focus:ring-primary"
+                type="text" />
+            </div>
+
+            <select id="stateSelect" class="w-full h-12 rounded-lg border border-border-light p-3 dark:bg-zinc-700">
+              <option value="">All States</option>
+              <option>Madhya Pradesh</option>
+              <option>Uttar Pradesh</option>
+              <option>Punjab</option>
+            </select>
+
+            <select id="districtSelect" class="w-full h-12 rounded-lg border border-border-light p-3 dark:bg-zinc-700">
+              <option value="">All Districts</option>
+              <option>Indore</option>
+              <option>Bhopal</option>
+              <option>Jabalpur</option>
+            </select>
+
+            <select id="mandiSelect" class="w-full h-12 rounded-lg border border-border-light p-3 dark:bg-zinc-700">
+              <option value="">All Mandis</option>
+              <option>Indore Mandi</option>
+              <option>Choithram Mandi</option>
+            </select>
+
+            <div>
+              <p class="font-medium mb-2">Filter by Crop Type</p>
+              <div class="flex flex-wrap gap-3">
+                <label><input type="radio" name="type" value="all" checked class="text-primary"> All</label>
+                <label><input type="radio" name="type" value="grains" class="text-primary"> Grains</label>
+                <label><input type="radio" name="type" value="vegetables" class="text-primary"> Vegetables</label>
+                <label><input type="radio" name="type" value="fruits" class="text-primary"> Fruits</label>
+              </div>
+            </div>
+
+            <button id="applyFilters"
+              class="w-full h-12 rounded-lg bg-primary text-white font-bold hover:bg-green-700 transition">Apply
+              Filters</button>
+          </div>
+        </aside>
+
+        <!-- RESULTS -->
+        <section class="w-full lg:w-2/3 xl:w-3/4">
+          <div class="flex flex-wrap justify-between items-center mb-6">
+            <div>
+              <h1 class="text-3xl font-black">Live Mandi Prices</h1>
+              <p class="text-secondary">Find the best prices for your crops</p>
+            </div>
+
+            <div class="flex border rounded-lg overflow-hidden">
+              <button id="cardViewBtn"
+                class="px-3 py-1.5 bg-primary text-white text-sm flex items-center gap-1"><span
+                  class="material-symbols-outlined text-base">grid_view</span> Card</button>
+              <button id="tableViewBtn"
+                class="px-3 py-1.5 text-secondary text-sm flex items-center gap-1"><span
+                  class="material-symbols-outlined text-base">table_rows</span> Table</button>
+            </div>
+          </div>
+
+          <div id="cropContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+
+          <div id="emptyState"
+            class="hidden text-center bg-white dark:bg-zinc-800 rounded-lg p-10 mt-10 shadow-sm flex-col items-center justify-center">
+            <img class="w-32 h-32 mx-auto mb-4"
+              src="https://cdn-icons-png.flaticon.com/512/1178/1178076.png" />
+            <p class="text-lg font-bold">No Prices Found</p>
+            <p class="text-secondary text-sm">Try adjusting your filters to see available crops.</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer
+      class="mt-16 border-t border-border-light dark:border-border-dark px-6 md:px-10 lg:px-20 py-6 text-center text-secondary text-sm">
+      <p>© 2025 AgriConnect. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    const crops = [
+      { name: "Wheat", mandi: "Indore Mandi", state: "Madhya Pradesh", district: "Indore", type: "grains", price: 2500, change: 50 },
+      { name: "Tomato", mandi: "Indore Mandi", state: "Madhya Pradesh", district: "Indore", type: "vegetables", price: 1800, change: -25 },
+      { name: "Soybean", mandi: "Bhopal Mandi", state: "Madhya Pradesh", district: "Bhopal", type: "grains", price: 4200, change: 100 },
+      { name: "Apple", mandi: "Ludhiana Mandi", state: "Punjab", district: "Ludhiana", type: "fruits", price: 7500, change: 150 }
+    ];
+
+    const cropContainer = document.getElementById("cropContainer");
+    const emptyState = document.getElementById("emptyState");
+
+    function renderCrops(list) {
+      cropContainer.innerHTML = "";
+      if (list.length === 0) {
+        emptyState.classList.remove("hidden");
+        return;
+      }
+      emptyState.classList.add("hidden");
+
+      list.forEach(crop => {
+        cropContainer.innerHTML += `
+        <div class="bg-white dark:bg-zinc-800 rounded-lg shadow-sm p-5 flex flex-col gap-4 transition hover:shadow-md">
+          <div>
+            <h4 class="text-xl font-bold">${crop.name}</h4>
+            <p class="text-sm text-secondary">${crop.mandi}, ${crop.state}</p>
+          </div>
+          <div>
+            <p class="text-3xl font-black text-primary">₹${crop.price} <span class="text-base text-secondary">/ Quintal</span></p>
+            <div class="flex items-center ${crop.change > 0 ? 'text-green-600' : 'text-red-600'}">
+              <span class="material-symbols-outlined">${crop.change > 0 ? 'arrow_upward' : 'arrow_downward'}</span>
+              <p class="text-sm font-medium">₹${Math.abs(crop.change)}</p>
+            </div>
+          </div>
+        </div>`;
+      });
+    }
+
+    function applyFilters() {
+      const search = document.getElementById("cropSearch").value.toLowerCase();
+      const state = document.getElementById("stateSelect").value;
+      const district = document.getElementById("districtSelect").value;
+      const mandi = document.getElementById("mandiSelect").value;
+      const type = document.querySelector("input[name='type']:checked").value;
+
+      const filtered = crops.filter(crop =>
+        (search === "" || crop.name.toLowerCase().includes(search)) &&
+        (state === "" || crop.state === state) &&
+        (district === "" || crop.district === district) &&
+        (mandi === "" || crop.mandi === mandi) &&
+        (type === "all" || crop.type === type)
+      );
+      renderCrops(filtered);
+    }
+
+    document.getElementById("applyFilters").addEventListener("click", applyFilters);
+
+    // Responsive menu
+    document.getElementById("mobileMenuBtn").addEventListener("click", () => {
+      document.getElementById("navMenu").classList.toggle("hidden");
+    });
+
+    // View toggle
+    const cardViewBtn = document.getElementById("cardViewBtn");
+    const tableViewBtn = document.getElementById("tableViewBtn");
+    cardViewBtn.addEventListener("click", () => {
+      cropContainer.classList.replace("block", "grid");
+      cardViewBtn.classList.add("bg-primary", "text-white");
+      tableViewBtn.classList.remove("bg-primary", "text-white");
+      renderCrops(crops);
+    });
+    tableViewBtn.addEventListener("click", () => {
+      cropContainer.classList.replace("grid", "block");
+      cropContainer.innerHTML = `<table class="w-full text-left border">
+        <thead><tr class="bg-primary text-white">
+          <th class="p-3">Crop</th><th class="p-3">Mandi</th><th class="p-3">Price (₹/Quintal)</th><th class="p-3">Change</th></tr></thead>
+        <tbody>${crops.map(c => `<tr class="border-b"><td class="p-3">${c.name}</td><td class="p-3">${c.mandi}</td><td class="p-3">${c.price}</td><td class="p-3 ${c.change>0?'text-green-600':'text-red-600'}">${c.change>0?'+':'-'}₹${Math.abs(c.change)}</td></tr>`).join('')}</tbody>
+      </table>`;
+      tableViewBtn.classList.add("bg-primary", "text-white");
+      cardViewBtn.classList.remove("bg-primary", "text-white");
+    });
+
+    // Initial render
+    renderCrops(crops);
+  </script>
+</body>
+</html>
